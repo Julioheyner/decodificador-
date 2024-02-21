@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descriptografador</title>
+    <style>
+        /* Estilos para todos os tamanhos de tela */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Estilos para telas maiores (desktops) */
+        @media only screen and (min-width: 768px) {
+            main {
+                padding: 0 50px;
+            }
+            .button-container {
+                flex-direction: row;
+            }
+            .button {
+                margin: 0 10px;
+            }
+        }
+        /* Estilos para telas menores (tablets e dispositivos móveis) */
+        @media only screen and (max-width: 767px) {
+            main {
+                padding: 0 20px;
+            }
+            .button-container {
+                flex-direction: column;
+            }
+            .button {
+                margin: 10px 0;
+            }
+        }
+
+        body {
+            box-sizing: border-box;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-image: linear-gradient(to bottom, #eaeaea, #b5b5b5, #828283,
+             #525354, #272829);
+        }
+        header {
+            padding: 2% 0% 0% 15%;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: column;
+            gap: 20px; 
+            width: 100%;
+            padding: 5% 5%;
+            margin-bottom: 70px;
+            font-size: 2.00rem;
+        }
+
+        .textarea-container {
+            display: grid;
+            gap: 20px; 
+            width: 100%; 
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        textarea {
+            color: black;
+            background-color: #00FFAB;
+            overflow-y: auto;
+            width: 100%;
+            height: 50px;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+        }
+    
+        .textarea-small {
+            width: calc(100% - 20px); 
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .button {
+            background-color: #FF1493;
+            border: none;
+            color: white;
+            font-size: 14px;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 16px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .button:hover {
+            background-color: #58E481;
+        }
+
+        .footer {
+            padding: 23.64px;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 400;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px; 
+           
+        }
+
+        .social-icons img {
+            width: 30px;
+            height: auto;
+            margin: 0 5px;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <img src="./assets/logo-alura.png" alt="Novo Ícone" style="vertical-align: middle; margin-right: 10px;padding: 3% 3% 0% 0%;">
+    <header>
+        <h1 style="font-family: Arial; font-size: 30px; font-weight: bold; color: #FB2576; text-shadow: 2px 2px 4px gray;">
+            <div style="display: flex; align-items: center;">
+                <img src="./assets/icons8-camaleão-96 (1).png" alt="Ícone Camaleão" style="vertical-align: middle; margin-right: 10px;">
+                <span style=" vertical-align: middle ">Chameleon decodificador </span>
+            </div>
+        </h1>
+    </header>   
+<main>
+    <p style="color: yellow; font-family: Arial; font-size: 16px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);"><strong>*Somente letras minúsculas sem acentuação!</strong></p>
+    <div class="textarea-container">
+        <div>
+            <label style="color: white; font-family: Arial; font-size: 14px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);"><strong>Texto:</strong></label>
+            <textarea id="textoEntrada" class="textarea-small" style="color: white;  font-family: Arial; font-size: 14px; background-color: #69AEFF;" placeholder="Entrar com o texto aqui..."></textarea>
+        </div>
+        <div>
+            <label style="color: white; font-family: Arial; font-size: 14px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);"><strong>Texto codificado:</strong></label>
+            <textarea id="textoCodificado" class="textarea-small" style="color: white; font-family: Arial; font-size: 14px; background-color: #69AEFF;" placeholder="O texto será codificado aqui..."></textarea>
+        </div>      
+        <div>
+            <label style="color: white; font-family: Arial; font-size: 14px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);"><strong>Texto codificado transferido:</strong></label>
+            <textarea id="textoTransferido" class="textarea-small" style="color: white;  font-family: Arial; font-size: 14px; background-color: #69AEFF;" placeholder="O texto codificado será transferido aqui..."></textarea>
+        </div>
+        <div>
+            <label style="color: white; font-family: Arial; font-size: 14px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);"><strong>Texto decodificado:</strong></label>
+            <textarea id="textoDecodificado" class="textarea-small" style="color: white;  font-family: Arial; font-size: 14px; background-color: #69AEFF;" placeholder="O texto decodificado será exibido aqui..."></textarea>
+        </div>
+    </div>
+    <h2 style="font-family: Arial; color: yellow; font-size: 16px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Sua escolha é:</h2>
+    <div class="button-container">
+        <button class="button" onclick="codificarTexto()">codificar</button>
+        <button class="button" onclick="copiarTexto()">copiar</button>
+        <button class="button" onclick="limparTexto()">limpar</button>
+        <button class="button" onclick="decodificarTexto()">decodificar</button>
+    </div>
+    <footer class="footer">
+        <p style="font-family: Arial; font-size: 12px; color: white; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); ">Developed by Julio Gonzales</p>
+        <div class="social-icons">
+            <a href="https://github.com/Julioheyner" target="_blank"><img src="./assets/github.png" alt="GitHub"></a>
+            <a href="https://br.linkedin.com/in/julio-gonzales-dev" target="_blank"><img src="./assets/linkedin.png" alt="LinkedIn"></a>
+        </div>
+    </footer>
+</main>
+<script>
+    function codificar(texto) {
+        const troca = {
+            'e': 'enter',
+            'i': 'imes',
+            'a': 'ai',
+            'o': 'ober',
+            'u': 'ufat'
+        };
+
+        let codigo = "";
+        for (let i = 0; i < texto.length; i++) {
+            let letra = texto[i];
+            if (letra in troca) {
+                codigo += troca[letra];
+            } else {
+                codigo += letra;
+            }
+        }
+        return codigo;
+    }
+
+    function decodificar(texto) {
+        const destroca = {
+            'enter': 'e',
+            'imes': 'i',
+            'ai': 'a',
+            'ober': 'o',
+            'ufat': 'u'
+        };
+
+        let codigo = texto;
+        for (let chave in destroca) {
+            codigo = codigo.replace(new RegExp(chave, 'g'), destroca[chave]);
+        }
+
+        return codigo;
+    }
+
+    function copiarTexto() {
+        const textoCodificado = document.getElementById("textoCodificado").value;
+        /* Transferir o texto codificado para a área de transferência */
+        document.getElementById("textoTransferido").value = textoCodificado;
+        console.log("Texto codificado transferido: " + textoCodificado);
+    }
+
+    function limparTexto() {
+        /* Limpar todas as áreas de texto */
+        document.getElementById("textoEntrada").value = "";
+        document.getElementById("textoCodificado").value = "";
+        document.getElementById("textoTransferido").value = "";
+        document.getElementById("textoDecodificado").value = "";
+    }
+    /* Função para validar o texto de entrada */
+    function validarTexto(texto) {
+        const regex = /^[a-z]+$/i; /* Expressão regular para verificar se o texto contém apenas letras minúsculas sem acentuação */
+        return regex.test(texto);
+    }
+
+    /* Função para processar o texto */
+    function processarTexto() {
+        const textoEntrada = document.getElementById("textoEntrada").value;
+
+
+        if (!validarTexto(textoEntrada)) {
+            alert("Por favor, insira apenas letras minúsculas sem acentuação.");
+            return;
+        }
+
+
+        const textoCodificado = codificar(textoEntrada);
+        document.getElementById("textoCodificado").value = textoCodificado;
+    }
+
+    function codificarTexto() {
+        const textoEntrada = document.getElementById("textoEntrada").value;
+        const textoCodificado = codificar(textoEntrada);
+        document.getElementById("textoCodificado").value = textoCodificado;
+    }
+
+    function decodificarTexto() {
+        const textoTransferido = document.getElementById("textoTransferido").value;
+        const textoDecodificado = decodificar(textoTransferido);
+        document.getElementById("textoDecodificado").value = textoDecodificado;
+    }
+</script>
+</body>
+</html>
